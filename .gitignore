@@ -1,0 +1,7 @@
+history/
+__pycache__/
+checkpoint/
+data/
+*.zip
+*.pth
+*.csv

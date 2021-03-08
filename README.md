@@ -69,6 +69,8 @@ python predict.py -d high
    <img src="https://github.com/AlessandroSaviolo/HBPSegmentation/blob/main/paper/results.gif" width="800">
 </p>
 
+(from left to right: input image, ground truth mask, predicted mask)
+
 ## Extract limbs from your custom images
 
 **Important**: The segmentation network was trained over images of size 640x480 and the predict.py script automatically resizes the input images to that size. Make sure that your images roughly match that aspect ratio.

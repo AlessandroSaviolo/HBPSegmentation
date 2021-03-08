@@ -18,10 +18,6 @@ If you use this code in an academic context, please cite our [paper](https://arx
 }
 ```
 
- <p align="center"> 
-    <img src="https://github.com/AlessandroSaviolo/HBPSegmentation/blob/main/paper/results.gif" width="800">
- </p>
-
 ## Installation
 
 ### Requirements
@@ -66,6 +62,12 @@ python predict.py -d high
 - If you want to visualize results when predicting use the command ```python predict.py -d high -v True```
 - Predicted masks are saved in ```~/HBPSegmentation/data/high/masks```
 - The first time you run this project, when executing ```predict.py``` it will automatically download the encoder SE-ResNet-50
+
+## Output example
+
+<p align="center"> 
+   <img src="https://github.com/AlessandroSaviolo/HBPSegmentation/blob/main/paper/results.gif" width="800">
+</p>
 
 ## Extract limbs from your custom images
 

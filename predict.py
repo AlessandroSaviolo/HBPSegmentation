@@ -50,6 +50,7 @@ def predict(net, device, data, image_scale, use_preprocessing_module, visualize)
   if not os.path.exists(testing_path+'/masks'):
     logging.info(f'Creating masks folder.')
     os.makedirs(testing_path+'/masks')
+
   test_dataset, test_loader = utils.getDataLoader(
     testing_path,
     batch_size=1,
@@ -71,11 +72,11 @@ def predict(net, device, data, image_scale, use_preprocessing_module, visualize)
     image, _ = test_dataset[i]
     predicted_mask = (net.predict(torch.from_numpy(image).to(device).unsqueeze(0)).squeeze().cpu().numpy().round()).astype('uint8')
     save_path = testing_path+'/masks/'+test_dataset.images_fps[i].split('/')[-1]
-    save(image_vis, predicted_mask, save_path)
+    save(predicted_mask, save_path)
     if visualize:
       utils.visualize(image=image_vis, predicted_mask=predicted_mask)
 
-def save(image, predicted_mask, save_path):
+def save(predicted_mask, save_path):
   w, h = predicted_mask.shape
   fig = plt.figure(figsize=(25.92, 19.44))
   fig.add_axes([0, 0, 1, 1])

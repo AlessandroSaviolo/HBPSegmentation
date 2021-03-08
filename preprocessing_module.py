@@ -30,8 +30,11 @@ import logging
 torch.set_grad_enabled(False)
 torch.backends.cudnn.enabled = True
 
+WIDTH = 640
+HEIGHT = 480
+
 def save(image, path):
-  w, h, c = image.shape
+  w, h, *_ = image.shape
   fig = plt.figure(figsize=(h/100, w/100))
   fig.add_axes([0, 0, 1, 1])
   plt.axis('off')
@@ -41,17 +44,18 @@ def save(image, path):
 
 def run(data_path):
   clahe_2 = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
-  clahe_4 = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+  clahe_4 = cv2.createCLAHE(clipLimit=4.0, tileGridSize=(8, 8))
   hed_network = HEDnetwork().cuda().eval()
   images_path = glob.glob(data_path+'/imgs/*.png')
   save_path = data_path+'/imgs_preprocessed'
   num_images = len(images_path)
   for i, image_path in enumerate(images_path):
     logging.info(f'Pre-processing image {i+1}/{num_images}')
-    image = cv2.imread(image_path)
-    image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    image_clahe_2 = clahe_2.apply(image_gray)
-    image_clahe_4 = clahe_4.apply(image_gray)
+    image = cv2.imread(image_path, 0)
+    image = cv2.resize(image, (WIDTH, HEIGHT))
+    save(image, image_path)
+    image_clahe_2 = clahe_2.apply(image)
+    image_clahe_4 = clahe_4.apply(image)
     image_hed = numpy.array(detect(hed_network, image_path))
     merged_image = cv2.merge((image_hed, image_clahe_2, image_clahe_4))
     save(merged_image, save_path+'/'+image_path.split('/')[-1])
@@ -137,8 +141,4 @@ class HEDnetwork(torch.nn.Module):
 		tenScoreFou = torch.nn.functional.interpolate(input=tenScoreFou, size=(tenInput.shape[2], tenInput.shape[3]), mode='bilinear', align_corners=False)
 		tenScoreFiv = torch.nn.functional.interpolate(input=tenScoreFiv, size=(tenInput.shape[2], tenInput.shape[3]), mode='bilinear', align_corners=False)
 		return self.netCombine(torch.cat([ tenScoreOne, tenScoreTwo, tenScoreThr, tenScoreFou, tenScoreFiv ], 1))
-
-if __name__ == '__main__':
-  data_path = './data/hbpsegmentation_real/dark'
-  run(clahe_2, clahe_4, hed_network, data_path)
 

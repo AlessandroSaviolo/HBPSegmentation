@@ -6,6 +6,10 @@ This repository contains the code associated to our paper: *Learning to Segment 
     <img src="https://github.com/AlessandroSaviolo/HBPSegmentation/blob/main/paper/framework.png" width="800">
  </p>
  
+ <p align="center"> 
+    <img src="https://github.com/AlessandroSaviolo/HBPSegmentation/blob/main/paper/results.gif" width="800">
+ </p>
+ 
 **Abstract**. This paper presents a new framework for human body part segmentation based on Deep Convolutional Neural Networks trained using only synthetic data. The proposed approach achieves cutting-edge results without the need of training the models with real annotated data of human body parts. Our contributions include a data generation pipeline, that exploits a game engine for the creation of the synthetic data used for training the network, and a novel pre-processing module, that combines edge response map and adaptive histogram equalization to guide the network to learn the shape of the human body parts ensuring robustness to changes in the illumination conditions. For selecting the best candidate architecture, we performed exhaustive tests on manually-annotated images of real human body limbs. We further present an ablation study to validate our pre-processing module. The results show that our method outperforms several state-of-the-art semantic segmentation networks by a large margin.
 
 If you use this code in an academic context, please cite our [paper](https://arxiv.org/abs/2102.01460):

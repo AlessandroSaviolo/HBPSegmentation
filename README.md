@@ -10,7 +10,7 @@ This repository contains the code associated to our paper: *Learning to Segment 
 
 If you use this code in an academic context, please cite our [paper](https://arxiv.org/abs/2102.01460):
 ```
-@ARTICLE{Saviolo2021HBPSegmentation
+@ARTICLE{Saviolo2021HBPSegmentation,
   title={Learning to Segment Human Body Parts with Synthetically Trained Deep Convolutional Networks},
   author={Saviolo, Alessandro and Bonotto, Matteo and Evangelista, Daniele and Imperoli, Marco and Menegatti, Emanuele and Pretto, Alberto},
   journal={arXiv:2102.01460},
